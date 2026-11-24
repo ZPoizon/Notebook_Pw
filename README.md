@@ -7,6 +7,22 @@
 
 Este repositório reúne minhas anotações, atividades e projetos da disciplina de Programação Web. A ideia é registrar não apenas o que foi desenvolvido, mas também os conceitos praticados e como as tecnologias se relacionam na construção de aplicações web.
 
+## Resumos das aulas e conteúdos
+
+A Aula 01 corresponde ao registro original. As demais são resumos temáticos de revisão baseados nos projetos, com numeração organizacional.
+
+- [Aula 01 — Introdução à Programação Web](./Aula_01_Resumo.md)
+- [Aula 02 — HTML e CSS](./Aula_02_Resumo.md)
+- [Aula 03 — JavaScript, DOM e eventos](./Aula_03_Resumo.md)
+- [Aula 04 — APIs, HTTP, JSON e assincronismo](./Aula_04_Resumo.md)
+- [Aula 05 — React, componentes, JSX e estado](./Aula_05_Resumo.md)
+- [Aula 06 — React — Miniaplicações](./Aula_06_Resumo.md)
+- [Aula 07 — React, Vite e CRUD de notas](./Aula_07_Resumo.md)
+- [Aula 08 — Vue 3 e Vite](./Aula_08_Resumo.md)
+- [Aula 09 — Ecoa — UX e modularização](./Aula_09_Resumo.md)
+- [Aula 10 — Ecoa — Persistência, mapas e serviços](./Aula_10_Resumo.md)
+- [Aula 11 — PWA, testes, build e publicação](./Aula_11_Resumo.md)
+
 ## Índice de estudos
 
 | Repositório | Atividade | Tecnologias principais |
