@@ -19,9 +19,8 @@ A Aula 01 corresponde ao registro original. As demais são resumos temáticos de
 - [Aula 06 — React — Miniaplicações](./Aula_06_Resumo.md)
 - [Aula 07 — React, Vite e CRUD de notas](./Aula_07_Resumo.md)
 - [Aula 08 — Vue 3 e Vite](./Aula_08_Resumo.md)
-- [Aula 09 — Ecoa — UX e modularização](./Aula_09_Resumo.md)
-- [Aula 10 — Ecoa — Persistência, mapas e serviços](./Aula_10_Resumo.md)
-- [Aula 11 — PWA, testes, build e publicação](./Aula_11_Resumo.md)
+- [Aula 09 — Ecoa — Interface, persistência e serviços](./Aula_09_Resumo.md)
+- [Aula 10 — PWA, testes, build e publicação](./Aula_10_Resumo.md)
 
 ## Índice de estudos
 

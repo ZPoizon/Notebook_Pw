@@ -1,44 +1,54 @@
-# Aula 09 — Ecoa — Projeto web, UX e organização modular
+# Aula 09 — Ecoa — Interface, persistência e integração de serviços
 
 **Professor da disciplina:** Me. Deivison S. Takatu
 
 > Registro temático de revisão, elaborado a partir dos projetos do semestre. A numeração é organizacional e não representa uma aula oficial ou data confirmada.
 
 ## Resumo
-Integrar conhecimentos em uma aplicação voltada a um problema social. O conteúdo é relacionado ao projeto [Ecoa](https://github.com/ZPoizon/Ecoa), permitindo revisar a teoria junto à prática.
+
+O [Ecoa](https://github.com/ZPoizon/Ecoa) reúne os conhecimentos de Programação Web em uma aplicação educativa sobre os 17 ODS. O projeto ajuda a encontrar ações conforme o tempo, o orçamento e o contexto da pessoa. É independente e não oficial da ONU.
 
 ## Objetivos de aprendizagem
-- Compreender os conceitos centrais de Ecoa.
-- Identificar sua aplicação no código e na estrutura do projeto.
-- Relacionar os conceitos à construção e manutenção de aplicações web.
 
-## Conteúdo principal
-- 17 ODS e definição do problema.
-- levantamento de requisitos.
-- filtros por orçamento e tempo.
-- design responsivo.
-- acessibilidade.
-- separação de responsabilidades em módulos JS e CSS.
-- navegação.
-- feedback visual.
-- dados locais e referências oficiais.
+- Relacionar requisitos, experiência do usuário e organização do código.
+- Diferenciar armazenamento local e dados compartilhados.
+- Integrar APIs e compreender as políticas de acesso aos dados.
 
-## Aplicação prática no projeto
-O Ecoa organiza a experiência em Agir, Aprender, Na cidade e Meu espaço. Oferece sugestões de ações, guias, quiz, plano pessoal e estimativas. É independente e não oficial da ONU.
+## Interface e organização
 
-## Metodologia e recursos
-Leitura de código-fonte, revisão da documentação técnica, análise da estrutura do repositório e exercícios de implementação. Os exercícios abaixo são propostas de revisão, não atividades oficiais atribuídas ao professor.
+- Definição do problema, levantamento de requisitos e filtros por tempo e orçamento.
+- HTML, CSS e JavaScript organizados por responsabilidade.
+- Design responsivo, acessibilidade, navegação por teclado e feedback visual.
+- Seções Agir, Aprender, Na cidade e Meu espaço, com ações, guias, quiz e plano pessoal.
+- Distinção entre informações oficiais, sugestões educativas e estimativas.
+
+## Persistência, mapas e serviços
+
+| Tecnologia | Aplicação no projeto |
+| --- | --- |
+| localStorage e JSON | Plano pessoal, preferências e cópia de segurança no navegador |
+| Leaflet e OpenStreetMap | Exibição do mapa e consulta de lugares |
+| Overpass, Photon e ViaCEP | Pontos geográficos, endereços e CEPs |
+| Supabase e PostgreSQL | Dados compartilhados e políticas de acesso com RLS |
+| pdf-lib | Exportação do plano em PDF |
+
+O armazenamento local não sincroniza automaticamente entre aparelhos. As integrações externas dependem da conexão e da disponibilidade dos serviços. A chave pública do Supabase pode estar no cliente, mas os segredos não devem ser publicados e as políticas do banco precisam restringir o acesso.
 
 ## Atividades de revisão
-1. Explorar os filtros.
-2. montar um plano de ações.
-3. revisar navegação por teclado e responsividade.
-4. distinguir dados oficiais de estimativas educativas.
+
+1. Explorar os filtros e salvar uma ação no plano.
+2. Recarregar a página e conferir a persistência dos dados.
+3. Exportar uma cópia de segurança e gerar o PDF.
+4. Pesquisar um endereço e identificar a origem dos pontos.
+5. Revisar responsividade, navegação por teclado e mensagens da interface.
+6. Conferir as políticas de acesso em ambiente de teste, sem publicar segredos.
+
+As atividades são propostas de revisão por leitura de código, documentação e exercícios de implementação, não atividades oficiais atribuídas ao professor.
 
 ## Referências
-- [Repositório Ecoa](https://github.com/ZPoizon/Ecoa)
-- [Documentação de referência](https://brasil.un.org/pt-br/sdgs)
-- [Caderno de Programação Web](./README.md)
 
----
-Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+- [Repositório e documentação do Ecoa](https://github.com/ZPoizon/Ecoa)
+- [ODS — ONU Brasil](https://brasil.un.org/pt-br/sdgs)
+- [Row Level Security — Supabase](https://supabase.com/docs/guides/database/postgres/row-level-security)
+- [Aula 10 — PWA, testes, build e publicação](./Aula_10_Resumo.md)
+- [Caderno de Programação Web](./README.md)
