@@ -49,3 +49,19 @@ Fórmula: (P1 * 0.25) + (P2 * 0.25) + ((PJ + AT) * 0.25)
 
 ---
 Resumo gerado a partir do material da Aula 01 fornecido pelo professor Deivison S. Takatu.
+
+---
+
+## Mapa técnico dos projetos do semestre
+
+| Projeto | Linguagem / marcação | Execução | Dados e serviços |
+| --- | --- | --- | --- |
+| Pwsite | HTML, CSS, JavaScript | Navegador, sem framework | Open Trivia DB, AnimeChan, localStorage |
+| Mini Apps | JavaScript, JSX, CSS | React 19 e react-scripts 5 | ViaCEP; estado em memória |
+| Notas | JavaScript, JSX, CSS | React 19 e Vite 8 | API REST no Render |
+| Vue Vite | TypeScript, Vue SFC, SCSS | Vue 3.5, Vite 7, pnpm | Axios, Pinia, API de demonstração |
+| Ecoa | HTML, CSS, JS, SQL, JSON | Navegador e scripts Node.js 22 | APIs geográficas, Supabase/PostgreSQL, armazenamento local |
+
+HTML é marcação, CSS é folha de estilos, JavaScript e TypeScript são linguagens de programação, JSON é formato de dados. React é biblioteca de interfaces, Vue é framework progressivo, Vite é ferramenta de desenvolvimento e build. Node.js é ambiente de execução JavaScript fora do navegador. Git é o versionador; GitHub hospeda os repositórios.
+
+Este quadro complementa o resumo original com evidências dos projetos. Não altera o conteúdo da aula ministrada.
