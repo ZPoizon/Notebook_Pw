@@ -37,3 +37,30 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Leitura técnica do Pwsite
+
+Estrutura real na raiz: index.html (documento e interface), style.css (design system e regras de apresentação), script.js (motor do jogo). Não há package.json nem dependência de React/Vue. O navegador interpreta os três arquivos diretamente.
+
+No HTML, as seções screenHome, screenLoading, screenQuiz e screenResults representam estados visuais distintos. A interface usa data-mode, data-diff e data-amount para associar escolhas aos elementos. O seletor de som tem aria-label; a meta viewport prepara a página para dispositivos móveis.
+
+O CSS declara tokens em :root, como --bg-dark, --primary, --success e --radius-md. A função var() reutiliza valores, reduzindo repetição. O reset global define box-sizing: border-box; Flexbox organiza o corpo e o contêiner; max-width: 800px limita a largura da aplicação. Gradientes radiais, blur e transições são recursos nativos de CSS. As fontes Plus Jakarta Sans e Space Grotesk são requisitadas ao Google Fonts.
+
+```css
+/* Exemplo didático com os tokens presentes no projeto */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+}
+```
+
+### Como revisar
+- Inspecionar o HTML pelo DevTools e localizar os IDs referenciados no script.
+- Diferenciar classe (reutilizável) de ID (identificação única).
+- Conferir o painel Network e o erro potencial do carregamento de app.js: o nome existente é script.js.
+
+**Fontes:** [index.html](https://github.com/ZPoizon/Pwsite/blob/HEAD/index.html), [style.css](https://github.com/ZPoizon/Pwsite/blob/HEAD/style.css).
