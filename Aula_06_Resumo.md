@@ -39,3 +39,41 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Implementação das cinco ferramentas
+
+| Ferramenta | Estado real | Algoritmo / funções |
+| --- | --- | --- |
+| Tarefas | tarefas, novaTarefa | adicionarTarefa, concluirTarefa, excluirTarefa |
+| Contador | cliques | incremento e reset |
+| Jogo da velha | tabuleiro, jogador | verificarVencedor, jogar, reiniciarJogo |
+| Calculadora | valorCalculadora | adicionarNumero, calcular, limparCalculadora |
+| CEP | cep, endereco, erroCep, carregando | alterarCep, buscarCep |
+
+A tarefa possui id gerado por Date.now(), texto e concluida. O spread cria uma nova lista ao adicionar; map altera somente a tarefa encontrada e filter remove o ID. Não há persistência de tarefas após recarregar.
+
+```js
+// Trecho da lógica de exclusão
+setTarefas(tarefas.filter(tarefa => tarefa.id !== id));
+```
+
+O jogo começa com Array(9).fill(""). O algoritmo verifica oito combinações de três casas; o empate exige tabuleiro cheio e ausência de vencedor. jogar impede movimentos em casas ocupadas ou após encerramento, copia o tabuleiro e alterna X/O. O resultado é derivado do estado, não precisa ser armazenado separadamente.
+
+A calculadora concatena operadores e números em uma string e usa eval dentro de try/catch. Isso executa JavaScript e não é apropriado para entrada livre; um parser matemático restrito é mais seguro. O buscador utiliza inputMode numérico, autoComplete postal-code e maxLength 9; permite hífen e consulta após normalizar o CEP.
+
+### Casos de revisão sugeridos
+| Cenário | Resultado esperado |
+| --- | --- |
+| Tarefa em branco | Não adicionada |
+| Excluir tarefa | Apenas o ID correspondente removido |
+| Três X na mesma linha | Vitória de X |
+| Casa já ocupada | Jogada ignorada |
+| CEP com menos de 8 dígitos | Mensagem de validação |
+| Erro de rede | Mensagem e fim do carregamento |
+
+Esses casos são propostas de teste, não resultados de execução.
+
+**Fonte:** [src/App.js](https://github.com/ZPoizon/mini-apps-react/blob/main/src/App.js).
