@@ -52,3 +52,33 @@ As atividades são propostas de revisão por leitura de código, documentação 
 - [Row Level Security — Supabase](https://supabase.com/docs/guides/database/postgres/row-level-security)
 - [Aula 10 — PWA, testes, build e publicação](./Aula_10_Resumo.md)
 - [Caderno de Programação Web](./README.md)
+
+
+---
+
+## Organização efetiva do Ecoa
+
+| Arquivos em public/ | Responsabilidade |
+| --- | --- |
+| index.html, app.js, estrutura.js | Interface e organização da aplicação |
+| rotas.js | Navegação por hash, histórico e abas |
+| acoes.js, agir.js, agir.css | Catálogo e busca de ações |
+| guias.js, aprender.js, quiz.js, quiz-ui.js | Conteúdo educativo e questionários |
+| estimativa.js, estimativa-ui.js | Modelos e interface de estimativas |
+| cidade.js, cidade-ui.js, cidade-busca.js | Experiência de consulta de locais |
+| plano.js, progresso.js, desafio.js, rotina.js | Planejamento e acompanhamento |
+| design-system.css, acessibilidade.js, acessibilidade.css | Consistência visual e recursos de acessibilidade |
+
+Não há dependência de framework de interface. O projeto usa JavaScript modular por responsabilidades e scripts de build próprios. O resolverRotaEcoa(hash) e os ouvintes hashchange/popstate mostram navegação por fragmento de URL, sem React Router ou Vue Router. A navegação também gerencia foco de teclado e abas.
+
+### Lógica de negócio: estimativas de impacto
+
+O módulo estimativa.js valida valores numéricos, intervalos e campos inteiros antes de calcular. Exemplos de fórmulas reais:
+- Banhos: (duração anterior − duração nova) × 10 L/min × quantidade de banhos.
+- Energia: potência em W × quantidade × horas × dias ÷ 1.000 = kWh.
+- Alimentos: gramas ÷ 1.000 = kg.
+- Óleo: mililitros ÷ 1.000 = L.
+
+Exemplo didático: reduzir 5 minutos em 10 banhos gera um cenário de referência de 500 L, assumindo vazão constante de 10 L/min. Não se trata de uma medição real. O projeto explicita fontes e limites das estimativas.
+
+**Fontes:** [rotas.js](https://github.com/ZPoizon/Ecoa/blob/main/public/rotas.js), [estimativa.js](https://github.com/ZPoizon/Ecoa/blob/main/public/estimativa.js), [public/](https://github.com/ZPoizon/Ecoa/tree/main/public).
