@@ -42,3 +42,39 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Integrações geográficas e persistência
+
+| Tecnologia | Arquivo / utilização |
+| --- | --- |
+| Photon | enderecos.js: https://photon.komoot.io/api/ e /reverse, geocodificação direta e reversa |
+| ViaCEP | enderecos.js: busca de CEP por /ws/{codigo}/json/ |
+| Overpass API | pontos-osm.js: overpass-api.de e overpass.private.coffee, consulta a dados OSM por área e categoria |
+| Leaflet | Biblioteca de mapa documentada no README |
+| OpenStreetMap | Fonte de dados geográficos, não é o mesmo que Leaflet |
+| Google Maps | pontos-osm.js: construção de link externo de rota |
+| Supabase/PostgreSQL | pontos-compartilhados.js e supabase/schema.sql |
+| localStorage | plano.js: armazenamento do plano e vínculos com pontos |
+| pdf-lib | Exportação PDF documentada e módulo plano-pdf.js |
+
+O autocomplete aplica debounce de 350 ms, consulta a partir de três caracteres, cancela requisições antigas com AbortController e usa atributos ARIA para interação por teclado. O módulo OSM monta consultas por bounding box (área delimitada por coordenadas), converte dados externos e combina pontos locais e remotos. A disponibilidade depende dos provedores e da cobertura regional.
+
+### Banco relacional e segurança
+
+schema.sql define public.pontos e public.denuncias, ambas com chave primária UUID. denuncias.ponto_id é chave estrangeira para pontos.id com ON DELETE CASCADE. Existem CHECKs para categoria, status, coordenadas e campos de texto. As extensões unaccent e pg_trgm auxiliam buscas sem acento e índices textuais GIN; há índices parciais de pontos aprovados por cidade, categoria e área.
+
+O SQL ativa RLS nas duas tabelas. O visitante anon recebe SELECT em pontos, mas a policy restringe a leitura a aprovados. O cadastro anônimo de novos pontos foi removido: a policy antiga de INSERT permanece, porém não existe o GRANT correspondente. O visitante pode inserir apenas ponto_id e motivo em denúncias de pontos aprovados. Não há autorização de UPDATE/DELETE para visitantes. Um trigger incrementa a contagem de denúncias no banco.
+
+```sql
+-- Trecho real da política de leitura
+create policy "Visitante le apenas aprovados"
+on public.pontos for select to anon
+using(status='aprovado');
+```
+
+RLS e GRANT atuam em conjunto. A chave pública não deve ser confundida com chave secreta de serviço. O plano pessoal não é sincronizado automaticamente pelo Supabase: plano.js serializa os dados localmente com JSON.stringify e recupera com JSON.parse; também permite importação e exportação.
+
+**Fontes:** [enderecos.js](https://github.com/ZPoizon/Ecoa/blob/main/public/enderecos.js), [pontos-osm.js](https://github.com/ZPoizon/Ecoa/blob/main/public/pontos-osm.js), [schema.sql](https://github.com/ZPoizon/Ecoa/blob/main/supabase/schema.sql), [plano.js](https://github.com/ZPoizon/Ecoa/blob/main/public/plano.js).
