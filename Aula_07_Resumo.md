@@ -41,3 +41,42 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Arquitetura e contrato observado
+
+O diretório notas-react contém package.json, vite.config.js, index.html, public e src. O projeto é ES module (type: module). Dependências: React e React DOM ^19.2.8; Vite ^8.3.0, plugin React ^6.1.1 e Oxlint ^1.81.0 como ferramentas de desenvolvimento.
+
+```text
+Interface React (App.jsx)
+    -> fetch / JSON / HTTP
+    -> API hospedada no Render
+    -> resposta com notas
+    -> setNotas -> interface atualizada
+```
+
+URL configurada: https://notas-api-6o5u.onrender.com/api/notes.
+
+| Método | Caminho | Dados enviados |
+| --- | --- | --- |
+| GET | /api/notes | Nenhum corpo |
+| POST | /api/notes | titulo, texto, criadoEm (ISO 8601) |
+| PUT | /api/notes/{id} | titulo, texto |
+| DELETE | /api/notes/{id} | Nenhum corpo |
+
+A interface espera id, titulo, texto e criadoEm nos registros. O estado editando indica o ID selecionado; editarNota preenche o formulário; cancelarEdicao limpa os campos; salvarNota usa preventDefault e escolhe POST ou PUT; excluirNota pede confirmação; carregarNotas executa GET e setNotas. A apresentação converte criadoEm com toLocaleString("pt-BR").
+
+```jsx
+useEffect(() => {
+  carregarNotas();
+}, []);
+```
+
+O efeito inicia a leitura após a montagem. Não confundir useEffect (sincronização com sistema externo) com useState (dados da interface).
+
+### Limitações e melhorias verificáveis
+O código não verifica resposta.ok antes de considerar as operações de escrita concluídas, nem exibe estado de carregamento; os erros são principalmente registrados no console. A API remota não foi chamada para evitar alterações em dados reais. O banco, framework do servidor, autenticação e políticas CORS não podem ser determinados apenas por esse front-end.
+
+**Fontes:** [App.jsx](https://github.com/ZPoizon/Notas-React-interface/blob/main/notas-react/src/App.jsx), [package.json](https://github.com/ZPoizon/Notas-React-interface/blob/main/notas-react/package.json).
