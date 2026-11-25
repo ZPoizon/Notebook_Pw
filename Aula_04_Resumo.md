@@ -43,3 +43,31 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Contratos de API encontrados no código
+
+| Serviço | Endpoint usado | Dados e tratamento |
+| --- | --- | --- |
+| Open Trivia DB | https://opentdb.com/api.php | amount, category=31, type=multiple, difficulty opcional; resposta results e response_code |
+| AnimeChan | https://animechan.xyz/api/random | O código espera quote, character e anime; combina uma citação remota com acervo local |
+| ViaCEP | https://viacep.com.br/ws/{cep}/json/ | CEP, logradouro, bairro, localidade, uf, ddd e indicador erro |
+
+fetchTriviaQuestions verifica res.ok, decodifica entidades HTML com decodeHtml, combina respostas corretas e incorretas e embaralha as alternativas. Se falhar ou não houver resultados, retorna questões locais. fetchQuoteQuestions também possui fallback. O funcionamento atual dos serviços não foi testado.
+
+No Mini Apps, buscarCep retira caracteres não numéricos, verifica comprimento, ativa carregando, limpa erros antigos, consulta ViaCEP e trata falha no finally. Uma resposta HTTP bem-sucedida não garante que o CEP exista: é necessário verificar dados.erro.
+
+```js
+// Exemplo reduzido da consulta presente no Mini Apps
+const resposta = await fetch(
+  `https://viacep.com.br/ws/${cepLimpo}/json/`
+);
+if (!resposta.ok) throw new Error("Erro na consulta");
+const dados = await resposta.json();
+```
+
+**Conceitos para prova:** API não é necessariamente banco de dados; endpoint é um endereço de operação; JSON é serialização de dados; await aguarda uma Promise dentro de uma função async; fetch não rejeita automaticamente todo erro HTTP.
+
+**Fontes:** [Pwsite/script.js](https://github.com/ZPoizon/Pwsite/blob/HEAD/script.js), [Mini Apps/App.js](https://github.com/ZPoizon/mini-apps-react/blob/main/src/App.js).
