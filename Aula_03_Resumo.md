@@ -40,3 +40,40 @@ Leitura de código-fonte, revisão da documentação técnica, análise da estru
 
 ---
 Resumo temático baseado nos arquivos e documentação dos projetos acadêmicos.
+
+
+---
+
+## Anatomia do motor JavaScript
+
+O script.js possui 799 linhas na versão consultada. Organiza dados locais, áudio, estado, referências DOM, utilitários, integração externa, jogo, resultados e eventos.
+
+| Identificador real | Responsabilidade |
+| --- | --- |
+| CURATED_QUESTIONS_PTBR / CURATED_QUOTES | Arrays de objetos usados como acervo local |
+| SoundEngine | Classe que usa AudioContext, osciladores e controle de ganho |
+| state | Modo, dificuldade, questões, índice, score, streak, timer e bloqueio |
+| dom | Referências a elementos HTML obtidas por seletores |
+| shuffleArray | Cópia com spread e embaralhamento Fisher–Yates |
+| showScreen | Remove a classe active das telas e ativa a escolhida |
+| startQuiz / loadQuestion | Inicializa a partida e carrega questões |
+| startTimer / handleTimeOut | Controle de tempo |
+| handleOptionSelect | Processamento de resposta |
+| finishQuiz / renderReviewList | Resultados e revisão |
+| setupEventListeners | Associação dos eventos de interface |
+
+Exemplo reduzido da lógica real:
+
+```js
+function showScreen(screenEl) {
+  [dom.screenHome, dom.screenLoading, dom.screenQuiz, dom.screenResults]
+    .forEach(s => s.classList.remove('active'));
+  screenEl.classList.add('active');
+}
+```
+
+A função não navega para outro HTML; apenas altera a classe. O objeto state centraliza o estado e a interface é atualizada manualmente. O evento DOMContentLoaded inicializa a aplicação; clearInterval evita manter temporizadores antigos quando uma partida começa.
+
+As chaves anime_quiz_high_score e anime_quiz_max_streak persistem recordes por origem no localStorage. Os valores são strings e são convertidos com parseInt ao comparar recordes. Não existe banco remoto nesse projeto.
+
+**Fonte:** [script.js](https://github.com/ZPoizon/Pwsite/blob/HEAD/script.js).
